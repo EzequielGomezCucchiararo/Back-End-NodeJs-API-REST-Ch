@@ -1,5 +1,5 @@
 import { db } from '../firebase.js';
-import { SENTENCES_COLLECTION_NAME } from './sentences.factory.js';
+import { SENTENCES_COLLECTION_NAME } from './parse-sentences.js';
 
 const getSentences = async () => {
   const sentencesCollection = db.collection(SENTENCES_COLLECTION_NAME);

@@ -1,4 +1,4 @@
-import { SENTENCES_COLLECTION_NAME } from './sentences.factory.js';
+import { SENTENCES_COLLECTION_NAME } from './parse-sentences.js';
 import { db, clearCollection } from '../firebase.js';
 
 export const importSentencesToFirestore = async (sentences) => {

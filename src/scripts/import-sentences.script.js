@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import { readFile } from '../utils/readFile.js';
 import { importSentencesToFirestore } from '../sentences/import-sentences.js';
-import { parseSentences } from '../sentences/sentences.factory.js';
+import { parseSentences } from '../sentences/parse-sentences.js';
 
 dotenv.config();
 

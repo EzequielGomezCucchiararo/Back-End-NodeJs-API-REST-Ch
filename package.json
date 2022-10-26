@@ -7,8 +7,8 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "import-sentences": "node src/sentences/import-sentences.script.js",
-    "top-sentences-words": "node src/sentences/top-sentences-words.script.js"
+    "import-sentences": "node src/scripts/import-sentences.script.js",
+    "top-sentences-words": "node src/scripts/top-sentences-words.script.js"
   },
   "author": "Ezequiel Gomez",
   "license": "ISC",

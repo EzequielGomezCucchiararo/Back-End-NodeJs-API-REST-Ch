@@ -1,17 +1,8 @@
-import * as dotenv from 'dotenv';
 import { SENTENCES_COLLECTION_NAME } from './sentences.factory.js';
-import { parseSentences } from './sentences.factory.js';
 import { db, clearCollection } from '../firebase.js';
-import { readFile } from '../utils/readFile.js';
 
-dotenv.config();
-
-(async () => {
+export const importSentencesToFirestore = async (sentences) => {
   try {
-    const filePath = process.argv[2];
-    const rawSentences = readFile(filePath);
-    const sentences = parseSentences(rawSentences);
-
     await clearCollection(db, SENTENCES_COLLECTION_NAME);
 
     const sentencesCollection = db.collection(SENTENCES_COLLECTION_NAME);
@@ -20,9 +11,7 @@ dotenv.config();
       const sentenceRef = sentencesCollection.doc(sentence.id);
       await sentenceRef.set(sentence);
     });
-
-    console.log('Sentences imported to the DB');
-  } catch (e) {
-    console.log('Error:', e.stack);
+  } catch (error) {
+    throw new Error('Error: the sentences could not be imported into the database');
   }
-})();
+};

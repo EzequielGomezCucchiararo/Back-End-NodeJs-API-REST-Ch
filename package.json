@@ -1,0 +1,15 @@
+{
+  "name": "talentbait-be-challenge",
+  "version": "1.0.0",
+  "description": "Your challenge is to develop a Node.js web server in express.js that handles a data",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ezequiel Gomez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ./jest.config.json",
+    "test:tdd": "npm run test -- --watch",
     "import-sentences": "node src/scripts/import-sentences.script.js",
     "top-sentences-words": "node src/scripts/top-sentences-words.script.js"
   },
@@ -19,6 +20,7 @@
     "firebase-admin": "^11.2.0"
   },
   "devDependencies": {
+    "jest": "^29.2.2",
     "nodemon": "^2.0.20"
   }
 }

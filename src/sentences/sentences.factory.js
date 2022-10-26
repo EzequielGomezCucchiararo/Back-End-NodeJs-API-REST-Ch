@@ -10,7 +10,10 @@ function parseCategories(categoriesMap) {
   }, []);
 }
 
-export function sentencesFactory(description, categories) {
+// TODO: Move this const
+export const SENTENCES_COLLECTION_NAME = 'sentences';
+
+function sentencesFactory(description, categories) {
   const id = crypto.randomUUID();
   const jobPost = { id, description, categories };
 

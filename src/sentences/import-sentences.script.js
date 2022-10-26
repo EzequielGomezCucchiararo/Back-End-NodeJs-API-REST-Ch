@@ -1,11 +1,10 @@
 import * as dotenv from 'dotenv';
-import { db, clearCollection } from '../firebase.js';
+import { SENTENCES_COLLECTION_NAME } from './sentences.factory.js';
 import { parseSentences } from './sentences.factory.js';
+import { db, clearCollection } from '../firebase.js';
 import { readFile } from '../utils/readFile.js';
 
 dotenv.config();
-
-const SENTENCES_COLLECTION_NAME = 'sentences';
 
 (async () => {
   try {
@@ -17,12 +16,12 @@ const SENTENCES_COLLECTION_NAME = 'sentences';
 
     const sentencesCollection = db.collection(SENTENCES_COLLECTION_NAME);
 
-    sentences.forEach(async (jobPost) => {
-      const jobPostRef = sentencesCollection.doc(jobPost.id);
-      await jobPostRef.set(jobPost);
+    sentences.forEach(async (sentence) => {
+      const sentenceRef = sentencesCollection.doc(sentence.id);
+      await sentenceRef.set(sentence);
     });
 
-    console.log('Sentences added to the DDBB');
+    console.log('Sentences imported to the DB');
   } catch (e) {
     console.log('Error:', e.stack);
   }

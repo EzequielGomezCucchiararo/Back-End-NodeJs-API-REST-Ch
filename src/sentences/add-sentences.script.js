@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { db, deleteCollection } from '../firebase.js';
+import { db, clearCollection } from '../firebase.js';
 import { parseSentences } from './sentences.factory.js';
 import { readFile } from '../utils/readFile.js';
 
@@ -13,7 +13,7 @@ const SENTENCES_COLLECTION_NAME = 'sentences';
     const rawSentences = readFile(filePath);
     const sentences = parseSentences(rawSentences);
 
-    await deleteCollection(db, SENTENCES_COLLECTION_NAME);
+    await clearCollection(db, SENTENCES_COLLECTION_NAME);
 
     const sentencesCollection = db.collection(SENTENCES_COLLECTION_NAME);
 

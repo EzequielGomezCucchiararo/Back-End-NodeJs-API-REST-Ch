@@ -25,7 +25,7 @@ async function deleteQueryBatch(db, query, resolve) {
   });
 }
 
-async function deleteCollection(db, collectionPath) {
+async function clearCollection(db, collectionPath) {
   const collectionRef = db.collection(collectionPath);
   const query = collectionRef.orderBy('__name__');
 
@@ -42,7 +42,7 @@ const db = getFirestore();
 
 export {
   db,
-  deleteCollection
+  clearCollection
 }
 
 

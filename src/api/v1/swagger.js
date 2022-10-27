@@ -1,6 +1,8 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUI from 'swagger-ui-express';
 
+// TODO: Base page works, add proper endpoint documentation
+
 const options = {
   definition: {
     openapi: '3.0.0',

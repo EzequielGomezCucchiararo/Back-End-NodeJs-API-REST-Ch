@@ -11,7 +11,7 @@ const options = {
   },
   apis: [
     'src/api/v1/routes/index.routes.js',
-    'src/services/sentences.service.js'
+    'src/services/sentences.repository.js'
   ]
 };
 

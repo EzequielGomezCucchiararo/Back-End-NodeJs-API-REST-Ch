@@ -1,8 +1,8 @@
-import { sentencesService } from '../services/sentences.service.js';
+import { sentencesRepository } from '../repositories/sentences.repository.js';
 
 const getAllSentences = async (req, res) => {
   try {
-    const sentences = await sentencesService.getAll();
+    const sentences = await sentencesRepository.getAll();
 
     res.status(200).send({ status: 'OK', data: sentences });
   } catch (error) {

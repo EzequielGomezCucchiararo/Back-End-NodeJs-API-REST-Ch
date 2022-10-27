@@ -4,5 +4,7 @@ import { sentencesController } from '../../../controllers/sentences.controller.j
 const router = express.Router();
 
 router.get('/', sentencesController.getAllSentences);
+router.get('/:id', sentencesController.getById);
+router.post('/', sentencesController.create);
 
 export const sentencesRoutes = router;

@@ -9,7 +9,7 @@ jest.mock('crypto', () => ({ randomUUID: () => id }));
 
 describe('sentenceFactory', () => {
   it('should return a valid "sentence" object', () => {
-    const sentence = sentenceFactory(description, categories);
+    const sentence = sentenceFactory({ description, categories });
 
     expect(sentence).toMatchObject({
       id,

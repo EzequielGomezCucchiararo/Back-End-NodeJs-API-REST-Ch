@@ -79,7 +79,7 @@ const parseSentences = (data) => {
     try {
       const parsed = JSON.parse(element);
       const categories = parseCategories(parsed.cats);
-      const sentence = sentenceFactory(parsed.text, categories);
+      const sentence = sentenceFactory({ description: parsed.text, categories });
 
       acc.push(sentence);
     } catch (e) {

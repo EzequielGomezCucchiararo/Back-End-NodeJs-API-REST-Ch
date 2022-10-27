@@ -3,14 +3,13 @@ import { sentenceFactory } from '../factories/sentence.factory.js';
 
 const SENTENCES_COLLECTION_NAME = 'sentences';
 const sentencesCollectionRef = db.collection(SENTENCES_COLLECTION_NAME);
-const pageSize = 3;
 
-const getAll = async (page = 1, sortingOrder = 'desc') => {
+const getAll = async ({ page, limit, sortingOrder }) => {
   try {
     const query = sentencesCollectionRef
       .orderBy('description', sortingOrder)
-      .limit(pageSize)
-      .offset(pageSize * (page - 1))
+      .limit(limit)
+      .offset(limit * (page - 1))
 
     const sentencesSnapshot = await query.get();
     const sentences = sentencesSnapshot.docs.map((doc) => doc.data());

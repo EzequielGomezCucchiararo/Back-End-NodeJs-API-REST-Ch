@@ -1,9 +1,19 @@
 import { sentencesRepository } from '../repositories/sentences.repository.js';
 
+const DEFAULT_PAGE = 1;
+const DEFAULT_PAGE_SIZE = 10;
+const DEFAULT_SORTING_ORDER = 'desc';
+
 // TODO: Improve error handling
 const getAllSentences = async (req, res) => {
+  const {
+    page = DEFAULT_PAGE,
+    limit = DEFAULT_PAGE_SIZE,
+    sortingOrder = DEFAULT_SORTING_ORDER,
+  } = req.query;
+
   try {
-    const sentences = await sentencesRepository.getAll();
+    const sentences = await sentencesRepository.getAll({page, limit, sortingOrder });
 
     res.status(200).send({ status: 'OK', data: sentences });
   } catch (error) {

@@ -1,13 +1,4 @@
-import { db } from '../firebase.js';
-import { SENTENCES_COLLECTION_NAME } from './parse-sentences.js';
-
-const getSentences = async () => {
-  const sentencesCollection = db.collection(SENTENCES_COLLECTION_NAME);
-  const sentencesSnapshot = await sentencesCollection.get();
-  const sentences = sentencesSnapshot.docs.map((doc) => doc.data());
-
-  return sentences;
-}
+import { sentencesService } from '../services/sentences.service.js';
 
 const getSentencesWords = (sentences) => {
   const words = sentences.reduce((acc, sentence) => {
@@ -41,7 +32,7 @@ const countWordsOccurrencesArray = (words) => {
 }
 
 export const getTopSentencesWords = async (topLimit) => {
-  const sentences = await getSentences();
+  const sentences = await sentencesService.getAll();
   const sentencesWords = getSentencesWords(sentences);
   const wordsOccurrencesList = countWordsOccurrencesArray(sentencesWords);
 

@@ -10,9 +10,6 @@ const parseCategories = (categoriesMap) => {
   }, []);
 }
 
-// TODO: Move this const
-export const SENTENCES_COLLECTION_NAME = 'sentences';
-
 export const parseSentences = (data) => {
   if (!data) {
     return [];
@@ -22,16 +19,18 @@ export const parseSentences = (data) => {
   const FB_READS_LIMIT_GUARD = 2;
   const sentences = data.split('\n').slice(0, FB_READS_LIMIT_GUARD);
 
-  return sentences.map((element) => {
+  return sentences.reduce((acc, element) => {
     try {
       const parsed = JSON.parse(element);
       const categories = parseCategories(parsed.cats);
       const sentence = sentenceFactory(parsed.text, categories);
 
-      return sentence;
-
+      acc.push(sentence);
     } catch (e) {
-      return null;
+      // TODO: Improve this
+      console.log('Invalid "sentence" data to be converted');
     }
-  });
+
+    return acc;
+  }, []);
 }

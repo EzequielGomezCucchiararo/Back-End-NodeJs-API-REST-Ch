@@ -8,16 +8,19 @@
     "dev": "nodemon src/index.js",
     "test": "jest --config ./jest.config.json",
     "test:tdd": "npm run test -- --watch",
-    "import-sentences": "node src/scripts/import-sentences.script.js",
-    "top-sentences-words": "node src/scripts/top-sentences-words.script.js"
+    "import-sentences": "node src/bin/import-sentences.script.js",
+    "top-sentences-words": "node src/bin/top-sentences-words.script.js"
   },
   "author": "Ezequiel Gomez",
   "license": "ISC",
   "dependencies": {
+    "apicache": "^1.6.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "firebase": "^9.12.1",
-    "firebase-admin": "^11.2.0"
+    "firebase-admin": "^11.2.0",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.19.6",

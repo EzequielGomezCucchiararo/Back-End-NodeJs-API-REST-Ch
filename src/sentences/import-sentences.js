@@ -1,11 +1,12 @@
-import { SENTENCES_COLLECTION_NAME } from './parse-sentences.js';
+import { sentencesService } from '../services/sentences.service.js';
+
 import { db, clearCollection } from '../firebase.js';
 
 export const importSentencesToFirestore = async (sentences) => {
   try {
-    await clearCollection(db, SENTENCES_COLLECTION_NAME);
+    await clearCollection(db, sentencesService.SENTENCES_COLLECTION_NAME);
 
-    const sentencesCollection = db.collection(SENTENCES_COLLECTION_NAME);
+    const sentencesCollection = db.collection(sentencesService.SENTENCES_COLLECTION_NAME);
 
     sentences.forEach(async (sentence) => {
       const sentenceRef = sentencesCollection.doc(sentence.id);

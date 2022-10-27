@@ -44,6 +44,16 @@ const create = async (payload) => {
   }
 };
 
+const update = async ({ id, payload }) => {
+  try {
+    const res = await sentencesCollectionRef.doc(id).update(payload);
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const remove = async (id) => {
   try {
     const res = await sentencesCollectionRef.doc(id).delete();
@@ -59,5 +69,6 @@ export const sentencesRepository = {
   getAll,
   getById,
   create,
-  remove
+  remove,
+  update
 };

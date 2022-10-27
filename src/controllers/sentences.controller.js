@@ -29,14 +29,12 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   const { body } = req;
-  const { description, categories } = body;
+  const { payload } = body;
 
   // TODO: Basic validation here (improve with some modeling tool)
-  if (!description) {
+  if (!payload.description) {
     return;
   }
-
-  const payload = { description, categories };
 
   try {
     const createdSentence = await sentencesRepository.create(payload);
@@ -50,16 +48,25 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
+  const { id } = req.params;
+  const { payload } = req.body;
 
+  try {
+    const updatedSentence = await sentencesRepository.update({ id, payload });
+
+    res.status(204).send({ status: 'OK', data: updatedSentence });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
 };
 
 const remove = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await sentencesRepository.remove(id);
-
-    console.log(result);
+    await sentencesRepository.remove(id);
 
     res.status(204).send({ status: 'OK' });
   } catch (error) {

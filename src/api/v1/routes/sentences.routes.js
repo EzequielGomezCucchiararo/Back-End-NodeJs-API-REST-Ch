@@ -9,5 +9,7 @@ router
   .post('/', sentencesController.create)
   .patch('/:id', sentencesController.update)
   .delete('/:id', sentencesController.remove)
+  // TODO: This route can be perfectly separated from "sentence" logic
+  .post('/translate', sentencesController.translate)
 
 export const sentencesRoutes = router;

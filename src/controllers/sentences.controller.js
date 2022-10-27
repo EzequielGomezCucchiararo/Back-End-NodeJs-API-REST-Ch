@@ -1,4 +1,5 @@
 import { sentencesRepository } from '../repositories/sentences.repository.js';
+import { deeplTranslationService } from '../services/depl.translation.service.js';
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 10;
@@ -6,6 +7,7 @@ const DEFAULT_SORTING_ORDER = 'desc';
 
 // TODO: Improve error handling
 const getAllSentences = async (req, res) => {
+  // TODO: Validate this values: negative numbers, incorrect sortingOrder values...
   const {
     page = DEFAULT_PAGE,
     limit = DEFAULT_PAGE_SIZE,
@@ -86,10 +88,18 @@ const remove = async (req, res) => {
   }
 };
 
+const translate = async (req, res) => {
+  const { text } = req.body;
+  const result = await deeplTranslationService.translateText(text);
+
+  res.status(200).send({ status: 'OK', data: result });
+}
+
 export const sentencesController = {
   getAllSentences,
   getById,
   create,
   update,
-  remove
+  remove,
+  translate
 }

@@ -1,5 +1,6 @@
 import { sentencesRepository } from '../repositories/sentences.repository.js';
 
+// TODO: Improve error handling
 const getAllSentences = async (req, res) => {
   try {
     const sentences = await sentencesRepository.getAll();
@@ -36,13 +37,42 @@ const create = async (req, res) => {
   }
 
   const payload = { description, categories };
-  const createdSentence = await sentencesRepository.create(payload);
 
-  res.status(201).send({ status: "OK", data: createdSentence });
+  try {
+    const createdSentence = await sentencesRepository.create(payload);
+    res.status(201).send({ status: "OK", data: createdSentence });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
+
 }
+
+const update = async (req, res) => {
+
+};
+
+const remove = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await sentencesRepository.remove(id);
+
+    console.log(result);
+
+    res.status(204).send({ status: 'OK' });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
+};
 
 export const sentencesController = {
   getAllSentences,
   getById,
-  create
+  create,
+  update,
+  remove
 }

@@ -3,8 +3,11 @@ import { sentencesController } from '../../../controllers/sentences.controller.j
 
 const router = express.Router();
 
-router.get('/', sentencesController.getAllSentences);
-router.get('/:id', sentencesController.getById);
-router.post('/', sentencesController.create);
+router
+  .get('/', sentencesController.getAllSentences)
+  .get('/:id', sentencesController.getById)
+  .post('/', sentencesController.create)
+  .patch('/:id', sentencesController.update)
+  .delete('/:id', sentencesController.remove)
 
 export const sentencesRoutes = router;

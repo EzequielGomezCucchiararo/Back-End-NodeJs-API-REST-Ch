@@ -34,17 +34,30 @@ const getById = async (id) => {
 
 const create = async (payload) => {
   const sentence = sentenceFactory(payload);
-  console.log('sentence', sentence);
-  const res = await sentencesCollectionRef.doc(sentence.id).set(sentence);
 
-  console.log(res);
+  try {
+    const res = await sentencesCollectionRef.doc(sentence.id).set(sentence);
 
-  return res;
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const remove = async (id) => {
+  try {
+    const res = await sentencesCollectionRef.doc(id).delete();
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const sentencesRepository = {
   SENTENCES_COLLECTION_NAME,
   getAll,
   getById,
-  create
+  create,
+  remove
 };

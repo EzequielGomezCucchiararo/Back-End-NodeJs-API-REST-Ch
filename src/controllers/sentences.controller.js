@@ -15,7 +15,7 @@ const getAllSentences = async (req, res) => {
   } = req.query;
 
   try {
-    const sentences = await sentencesRepository.getAll({page, limit, sortingOrder });
+    const sentences = await sentencesRepository.getSentences({page, limit, sortingOrder });
 
     res.status(200).send({ status: 'OK', data: sentences });
   } catch (error) {

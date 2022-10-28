@@ -4,7 +4,18 @@ import { sentenceFactory } from '../factories/sentence.factory.js';
 const SENTENCES_COLLECTION_NAME = 'sentences';
 const sentencesCollectionRef = db.collection(SENTENCES_COLLECTION_NAME);
 
-const getAll = async ({ page, limit, sortingOrder }) => {
+const getAll = async () => {
+  try {
+    const sentencesSnapshot = await sentencesCollectionRef.get();
+    const sentences = sentencesSnapshot.docs.map((doc) => doc.data());
+
+    return sentences;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getSentences = async ({ page , limit, sortingOrder } = {}) => {
   try {
     const query = sentencesCollectionRef
       .orderBy('description', sortingOrder)
@@ -65,9 +76,10 @@ const remove = async (id) => {
 
 export const sentencesRepository = {
   SENTENCES_COLLECTION_NAME,
-  getAll,
+  getSentences,
   getById,
   create,
   remove,
-  update
+  update,
+  getAll
 };

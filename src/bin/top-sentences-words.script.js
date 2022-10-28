@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { sentencesService } from '../services/sentences.service';
+import { sentencesService } from '../services/sentences.service.js';
 
 dotenv.config();
 

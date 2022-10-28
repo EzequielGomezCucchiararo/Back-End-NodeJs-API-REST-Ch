@@ -2,6 +2,9 @@ import { clearCollection, db } from './firebase.service.js';
 import { sentenceFactory } from '../factories/sentence.factory.js';
 import { sentencesRepository } from '../repositories/sentences.repository.js';
 
+// NOTE: Added in order to avoid the Quota exceeded error in FB
+const FB_READS_LIMIT_GUARD = 20;
+
 const getSentencesWords = (sentences) => {
   const words = sentences.reduce((acc, sentence) => {
     const matchWordsRegex = /(\w+)/g;
@@ -71,8 +74,6 @@ const parseSentences = (data) => {
     return [];
   }
 
-  // NOTE: Added in order to avoid the Quota exceeded error in FB
-  const FB_READS_LIMIT_GUARD = 2;
   const sentences = data.split('\n').slice(0, FB_READS_LIMIT_GUARD);
 
   return sentences.reduce((acc, element) => {
